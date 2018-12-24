@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row calHead">
+    <div class="col-sm text-center text-danger">
+      <strong>{{month}} {{year}}</strong>
+    </div>
+  </div>  
+  <div class="row dayNames">
+    <div class="col col-sm text-center dayNames text-danger" *ngFor="let day of days">
+      <strong>{{day}}</strong>
+    </div>
+  </div>
+  
+  <div class="row calDate" *ngFor="let row of dateRows | keyvalue">
+    <div class="col col-sm text-center calDate text-secondary" *ngFor="let day of row.value">
+      
+      <span [ngClass]="{'badge badge-primary': day==today}">{{day}}</span>
+    </div>
+  </div>    
+</div>
