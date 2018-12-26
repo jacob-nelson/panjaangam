@@ -22,8 +22,11 @@ export class PanjaangamComponent implements OnInit {
   monthIndex: number;
   month: String;
   monthList: String;
+  yearList: number;
   selectedMonth: String;
   year: number;
+  years: number[] = [];  //range of years
+  selectedYear: number;
   numberOfDays: number;
   d: Date;
   today: number;
@@ -35,9 +38,13 @@ export class PanjaangamComponent implements OnInit {
     this.days = this.daysLong;
     this.months = this.monthsLong;
     this.monthIndex = this.d.getMonth();
-    this.year = this.d.getFullYear();
-    this.month = this.monthsLong[this.monthIndex];
+    this.year = this.d.getFullYear(); //current year
+    this.selectedYear = this.year;
+    this.setYearRange();
+    this.month = this.monthsLong[this.monthIndex];  //current month
     this.selectedMonth = this.monthsLong[this.monthIndex];
+    this.monthList = this.selectedMonth;
+    this.yearList = this.selectedYear;
     this.setNumberOfDays();
     this.dates = this.generateDates(this.numberOfDays);
     this.dateRows = this.generateDateRows(this.dates);
@@ -54,26 +61,40 @@ export class PanjaangamComponent implements OnInit {
     }
   }
 
-  redrawCalendar(selectedMonth){
+  redrawCalendar(selectedMonth, selectedYear) {
     this.selectedMonth = selectedMonth;
+    this.selectedYear = selectedYear;
     this.setMonthIndex();
     this.setNumberOfDays();
+    this.setYearRange();
     this.dates = this.generateDates(this.numberOfDays);
     this.dateRows = this.generateDateRows(this.dates);
-    console.log(this.monthsShort.indexOf(selectedMonth))
   }
 
-  setMonthIndex(){
-    this.monthIndex = this.monthsShort.indexOf(this.selectedMonth);
+  setYearRange(){
+    let startIndex = +this.selectedYear - 5;
+    let stopIndex = +this.selectedYear + +5;  // this is to convert to interger. this.selectedYear is actually a string.
+    this.years = [];
+    for(var i = startIndex; i <= stopIndex; i++){
+      this.years.push(i);
+    }
   }
 
-  setNumberOfDays(){
-    this.numberOfDays = new Date(this.year, this.monthIndex + 1, 0).getDate();
+  setMonthIndex() {
+    if (this.format == "short") {
+      this.monthIndex = this.monthsShort.indexOf(this.selectedMonth);
+    } else {
+      this.monthIndex = this.monthsLong.indexOf(this.selectedMonth);
+    }
+  }
+
+  setNumberOfDays() {
+    this.numberOfDays = new Date(this.selectedYear, this.monthIndex + 1, 0).getDate();
   }
 
   /* This method will return the index of week day in which the month starts. */
   getFirstDayOfMonth() {
-    const now = new Date(this.year, this.monthIndex);
+    const now = new Date(this.selectedYear, this.monthIndex);
     return new Date(now.getFullYear(), now.getMonth()).getDay();
   }
 
