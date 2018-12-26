@@ -1,7 +1,7 @@
 import {
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
 
 @Component({
@@ -21,6 +21,8 @@ export class PanjaangamComponent implements OnInit {
   months: String[];
   monthIndex: number;
   month: String;
+  monthList: String;
+  selectedMonth: String;
   year: number;
   numberOfDays: number;
   d: Date;
@@ -35,7 +37,8 @@ export class PanjaangamComponent implements OnInit {
     this.monthIndex = this.d.getMonth();
     this.year = this.d.getFullYear();
     this.month = this.monthsLong[this.monthIndex];
-    this.numberOfDays = new Date(this.year, this.monthIndex + 1, 0).getDate();
+    this.selectedMonth = this.monthsLong[this.monthIndex];
+    this.setNumberOfDays();
     this.dates = this.generateDates(this.numberOfDays);
     this.dateRows = this.generateDateRows(this.dates);
     this.today = this.d.getDate();
@@ -46,12 +49,31 @@ export class PanjaangamComponent implements OnInit {
       this.days = this.daysShort;
       this.months = this.monthsShort;
       this.month = this.monthsShort[this.monthIndex];
+      this.selectedMonth = this.monthsShort[this.monthIndex];
+      this.monthList = this.selectedMonth;
     }
+  }
+
+  redrawCalendar(selectedMonth){
+    this.selectedMonth = selectedMonth;
+    this.setMonthIndex();
+    this.setNumberOfDays();
+    this.dates = this.generateDates(this.numberOfDays);
+    this.dateRows = this.generateDateRows(this.dates);
+    console.log(this.monthsShort.indexOf(selectedMonth))
+  }
+
+  setMonthIndex(){
+    this.monthIndex = this.monthsShort.indexOf(this.selectedMonth);
+  }
+
+  setNumberOfDays(){
+    this.numberOfDays = new Date(this.year, this.monthIndex + 1, 0).getDate();
   }
 
   /* This method will return the index of week day in which the month starts. */
   getFirstDayOfMonth() {
-    const now = new Date();
+    const now = new Date(this.year, this.monthIndex);
     return new Date(now.getFullYear(), now.getMonth()).getDay();
   }
 

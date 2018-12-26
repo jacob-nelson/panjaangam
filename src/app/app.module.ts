@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PanjaangamComponent } from './panjaangam/panjaangam.component';
+
 
 @NgModule({
   declarations: [
@@ -10,7 +11,7 @@ import { PanjaangamComponent } from './panjaangam/panjaangam.component';
     PanjaangamComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
