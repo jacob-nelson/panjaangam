@@ -73,7 +73,7 @@ export class PanjaangamComponent implements OnInit {
 
   setYearRange(){
     let startIndex = +this.selectedYear - 5;
-    let stopIndex = +this.selectedYear + +5;  // this is to convert to interger. this.selectedYear is actually a string.
+    let stopIndex = +this.selectedYear + 5;  // this is to convert to interger. this.selectedYear is actually a string.
     this.years = [];
     for(var i = startIndex; i <= stopIndex; i++){
       this.years.push(i);
