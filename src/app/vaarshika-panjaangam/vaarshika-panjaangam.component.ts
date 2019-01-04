@@ -20,18 +20,23 @@ export class VaarshikaPanjaangamComponent implements OnInit {
   d: Date;
   days: String[];
   months: String[];
+  month: String;
   monthsDisplay: any[] = [];
   numberOfDays: number;
   years: number[] = [];  //range of years
   selectedYear: number;
+  year: number;
   monthlyDates: number[] = [];
+  today: number;
 
   constructor() {
     this.d = new Date();
     this.days = this.daysLong;
     this.months = this.monthsLong;
     //setting current year as selected year while initializing calendar
-    this.selectedYear = this.d.getFullYear();  
+    
+    this.year = this.selectedYear = this.d.getFullYear();  
+    this.today = this.d.getDate();
     this.setYearRange();
     this.redrawCalendar(this.selectedYear);
   }
@@ -41,6 +46,7 @@ export class VaarshikaPanjaangamComponent implements OnInit {
       this.days = this.daysShort;
       this.months = this.monthsShort;
     }
+    this.month = this.months[this.d.getMonth()];  //current month
     this.setMonthsDisplay(); 
   }
 

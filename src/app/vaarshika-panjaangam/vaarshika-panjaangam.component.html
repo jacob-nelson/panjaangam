@@ -20,7 +20,7 @@
       </div>
       <div class="row calDate" *ngFor="let row1 of getDateRows(md) | keyvalue">
         <div class="col col-sm text-center calDate text-secondary" *ngFor="let day of row1.value">
-          <span [ngClass]="{'badge badge-primary': day==today && month==selectedMonth && year == selectedYear}">{{day}}</span>
+          <span [ngClass]="{'badge badge-primary': day==today && month==md && year == selectedYear}">{{day}}</span>
         </div>
       </div>
     </div>
