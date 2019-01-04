@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row calHead">
+    <div class="col-sm text-center text-danger">
+      <select [(ngModel)]="selectedYear" (change)="redrawCalendar($event.target.value)">
+        <option [value]="yr" *ngFor="let yr of years">{{yr}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row" *ngFor="let row of monthsDisplay | keyvalue;">
+    <div class="col text-center" *ngFor="let md of row.value">
+      <div class="row">
+        <div class="col">
+          <strong>{{md}}</strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col dayNames" *ngFor="let day of days">
+          {{day}}
+        </div>
+      </div>
+      <div class="row calDate" *ngFor="let row1 of getDateRows(md) | keyvalue">
+        <div class="col col-sm text-center calDate text-secondary" *ngFor="let day of row1.value">
+          <span [ngClass]="{'badge badge-primary': day==today && month==selectedMonth && year == selectedYear}">{{day}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
