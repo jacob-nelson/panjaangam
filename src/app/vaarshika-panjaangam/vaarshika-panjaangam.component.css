@@ -4,3 +4,12 @@
 .col.dayNames{
     width: 90%;
 }
+
+.block{
+    margin: 0.2rem;
+    border: 1px solid #ccc;
+}
+
+.calDate{
+    cursor: pointer;
+}

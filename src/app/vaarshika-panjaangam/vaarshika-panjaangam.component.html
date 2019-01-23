@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="row" *ngFor="let row of monthsDisplay | keyvalue;">
-    <div class="col text-center" *ngFor="let md of row.value">
+    <div class="col text-center block" *ngFor="let md of row.value">
       <div class="row">
         <div class="col">
           <strong>{{md}}</strong>
@@ -18,8 +18,8 @@
           {{day}}
         </div>
       </div>
-      <div class="row calDate" *ngFor="let row1 of getDateRows(md) | keyvalue">
-        <div class="col col-sm text-center calDate text-secondary" *ngFor="let day of row1.value">
+      <div class="row" *ngFor="let row1 of getDateRows(md) | keyvalue">
+        <div class="col col-sm text-center calDate text-secondary" *ngFor="let day of row1.value" [class.text-danger]="clicked === md+day" (click)="clicked = md+day">
           <span [ngClass]="{'badge badge-primary': day==today && month==md && year == selectedYear}">{{day}}</span>
         </div>
       </div>

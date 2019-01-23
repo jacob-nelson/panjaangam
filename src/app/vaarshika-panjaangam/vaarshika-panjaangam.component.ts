@@ -1,7 +1,8 @@
 import {
   Component,
   Input,
-  OnInit
+  OnInit,
+  //Renderer
 } from '@angular/core';
 
 @Component({
@@ -29,7 +30,9 @@ export class VaarshikaPanjaangamComponent implements OnInit {
   monthlyDates: number[] = [];
   today: number;
 
-  constructor() {
+  constructor(
+    //private render:Renderer
+    ) {
     this.d = new Date();
     this.days = this.daysLong;
     this.months = this.monthsLong;
@@ -136,6 +139,12 @@ export class VaarshikaPanjaangamComponent implements OnInit {
   getDateRows(month){
     var monthIndex = this.months.indexOf(month);
     return this.monthlyDates[monthIndex];
+  }
+
+  selectADate(event:any){
+    //event.preventDefault()
+    //this.render.setElementClass(event.target,"text-danger",false);
+    console.log("selectADate => ", JSON.stringify(event))
   }
 
 }
